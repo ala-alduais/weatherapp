@@ -18,6 +18,9 @@ public class Map {
     private int fMapOn = 0;
 
     private JLayeredPane layeredPane;
+    private JLabel statusLabel;
+    private JTextPane infoPanel1;
+    private JTextPane infoPanel2;
 
     public void openMap() {
 
@@ -39,14 +42,38 @@ public class Map {
         // Create a JLabel to hold the image
         JLabel label = new JLabel(imageIcon);
         label.setBounds(0, 0, frame.getWidth(), frame.getHeight()); // Set the position and size of the label
-
+        
         layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, frame.getWidth(), frame.getHeight());
         frame.add(layeredPane);
 
         // Add map image label to default layer (0)
         layeredPane.add(label, Integer.valueOf(0));
-
+        
+        statusLabel = new JLabel();
+        statusLabel.setBounds(10, frame.getHeight() - 50, frame.getWidth() - 20, 40);
+        statusLabel.setHorizontalAlignment((SwingConstants.CENTER));
+        statusLabel.setOpaque(true);
+        statusLabel.setBackground(Color.LIGHT_GRAY);
+        frame.add(statusLabel);
+       
+        infoPanel1 = new JTextPane();
+        infoPanel1.setBounds(1050, 300, 200, 100);
+        infoPanel1.setContentType("text/html");
+        infoPanel1.setEditable(false);
+        infoPanel1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        infoPanel1.setVisible(false);
+        frame.add(infoPanel1);
+       
+        infoPanel2 = new JTextPane();
+        infoPanel2.setBounds(1050, 410, 200, 100);
+        infoPanel2.setContentType("text/html");
+        infoPanel2.setEditable(false);
+        infoPanel2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        infoPanel2.setVisible(false);
+        frame.add(infoPanel2);
+        
+        
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -115,11 +142,19 @@ public class Map {
                     layeredPane.revalidate();
                     layeredPane.repaint();
                     tMapOn = 1;
+                    
+                    statusLabel.setText("Areas that are highlighted on the map is at higher risk of tornado."
+                            + "It would be best to stay indoor until the risk has passed.");
+                    infoPanel1.setText("<html><b>Safety Tips:</b><br>1.Find Shelter</b><br>2.Avoid areas with trees.</b><br>3.Find a low-lying area and lay flat.");
+                    infoPanel1.setVisible(true);
+                    infoPanel2.setText("<html><b>Tornado Facts</b><br>It is a violently rotating air where wind variations with height support rotation in the updraft ");
+                    infoPanel2.setVisible(true);
                 } else {
                     layeredPane.remove(Tlabel);
                     layeredPane.revalidate();
                     layeredPane.repaint();
                     tMapOn = 0;
+                 
                 }
 
             }
@@ -144,6 +179,12 @@ public class Map {
                     layeredPane.revalidate();
                     layeredPane.repaint();
                     eMapOn = 1;
+                    
+                    statusLabel.setText("Areas that are highlighted on the map is at higher risk of earthquakes."
+                            + "It would be best to stay indoor or get to a safe location until the risk has passed");
+                    infoPanel1.setText("<html><b>Safety Tips:</b><br>1.Drop, Cover and Hold On</b><br>2.Stay inside and avoid doors and windows.</b><br>3.Keep head and neck covered");
+                    infoPanel2.setText("<html><b>Earthquake Facts</b><br>It is a result of the movement along the faults within the Earth. It can occur near the surface or deep below the surface");
+                    infoPanel2.setVisible(true);
                 } else {
                     layeredPane.remove(Elabel);
                     layeredPane.revalidate();
@@ -173,6 +214,13 @@ public class Map {
                     layeredPane.revalidate();
                     layeredPane.repaint();
                     fMapOn = 1;
+                    
+                    statusLabel.setText("Areas that are highlighted on the map are at higher risk of floods due to heavy rain."
+                            + "It would be best to move to a safe area until the risk has passed.");
+                    infoPanel1.setText("<html><b>Safety Tips:</b><br>1.Get to higher gronds.</b><br>2.Follow evacuation orders and heed warning signs. with trees.</b><br>3.Avoid floodwaters.");
+                    infoPanel1.setVisible(true);
+                    infoPanel2.setText("<html><b>Floods Facts</b><br>Flooding usually are a result from the failure of water control structure. It is also the cause of prolonged rain falls.");
+                    infoPanel2.setVisible(true);
                 } else {
                     layeredPane.remove(Flabel);
                     layeredPane.revalidate();
