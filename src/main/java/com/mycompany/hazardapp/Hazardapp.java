@@ -12,7 +12,6 @@ public class Hazardapp {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-         Map map = new Map();
-         map.openMap();
+         new LoginPage();
     }
 }
